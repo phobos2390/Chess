@@ -6,19 +6,41 @@ using System.Threading.Tasks;
 
 namespace Chess
 {
-    class Pawn : Piece
+    class Bishop : Piece
     {
-        public Pawn(bool white)
-            : base(white)
+        private char outputChar;
+
+        public Bishop(Color pieceColor, BoardLocation location)
+            : base(pieceColor, location)
         {
-            this.texture.Image = System.Drawing.Bitmap.FromFile(getRoot() + "Pawn.png");
-            this.texture.Size = this.texture.Image.Size;
-            this.texture.Visible = true;
+            if (pieceColor == Color.Black)
+            {
+                this.outputChar = 'b';
+            }
+            else
+            {
+                this.outputChar = 'B';
+            }
         }
 
-        public override void texture_Click(object sender, EventArgs e)
+        public override char OutputChar()
         {
-            //TODO
+            return this.outputChar;
+        }
+
+        public override IList<BoardLocation> AvailableSpaces(BoardLocation currentLocation)
+        {
+            return BoardLocation.DiagonalSpaces(currentLocation);
+        }
+
+        public override void MoveToLocation(BoardLocation nextLocation)
+        {
+            this.Location = nextLocation;
+        }
+
+        public override PieceType GetPieceType()
+        {
+            return PieceType.Bishop;
         }
     }
 }

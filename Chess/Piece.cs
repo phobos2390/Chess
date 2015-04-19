@@ -6,24 +6,10 @@ using System.Threading.Tasks;
 
 namespace Chess
 {
-    abstract class Piece
+    public abstract class Piece
     {
         private Color pieceColor;
         private BoardLocation location;
-
-        protected string getRoot()
-        {
-            string root;
-            if (this.pieceColor == Color.White)
-            {
-                root = "White";
-            }
-            else
-            {
-                root = "Black";
-            }
-            return root;
-        }
 
         public Piece(Color pieceColor, BoardLocation location)
         {
@@ -56,5 +42,11 @@ namespace Chess
         }
 
         public abstract char OutputChar();
+
+        public abstract IList<BoardLocation> AvailableSpaces(BoardLocation currentLocation);
+
+        public abstract void MoveToLocation(BoardLocation nextLocation);
+
+        public abstract PieceType GetPieceType();
     }
 }
